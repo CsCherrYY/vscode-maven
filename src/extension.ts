@@ -129,6 +129,8 @@ async function doActivate(_operationId: string, context: vscode.ExtensionContext
     if (isJavaExtEnabled()) {
         registerArtifactSearcher(context);
     }
+
+    setDependencyViewerContext();
 }
 
 function registerPomFileWatcher(context: vscode.ExtensionContext): void {
@@ -208,4 +210,9 @@ async function openPomHandler(node: MavenProject): Promise<void> {
     if (node !== undefined && node.pomPath) {
         await openFileIfExists(node.pomPath);
     }
+}
+
+function setDependencyViewerContext(): void {
+    const dependencyExt: vscode.Extension<any> | undefined = vscode.extensions.getExtension("vscjava.vscode-java-dependency");
+    vscode.commands.executeCommand("setContext", "dependencyViewerEnabled", `${!!dependencyExt}`);
 }

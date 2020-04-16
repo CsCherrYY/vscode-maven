@@ -254,6 +254,10 @@
         {
           "command": "maven.project.showDependencies",
           "when": "never"
+        },
+        {
+          "command": "maven.archetype.generate",
+          "when": "dependencyViewerEnabled == false"
         }
       ],
       "explorer/context": [
